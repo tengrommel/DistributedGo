@@ -15,6 +15,7 @@ golang语言简介
         - 指针类型
         - gc问题
         - 反射
+    - MVC
 3. 闭包 回调 匿名函数
 4. chan与goroutine
 5. csp编程模式
@@ -52,7 +53,7 @@ go 网络编程
 #第六章
 rabbitmq消息队列与分布式
 1. amqp
-2. erlang cookie集群的实现、
+2. erlang cookie集群的实现
 3. rabbitmq的几种模式
  
 
@@ -81,8 +82,8 @@ golang并发设计模式
    2. fanin fanout
 
 # 第十一章
-微服务 （一种设计模式）
-1. 消息队列与状态机
+微服务与golang （一种设计模式）
+1. 消息队列与状态机（如果有其它语言是否选用golang写状态机再议）
 2. restful与rpc的选择
 3. 服务发现与扩展
 
