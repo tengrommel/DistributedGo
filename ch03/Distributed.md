@@ -78,8 +78,9 @@ rabbitmq消息队列与分布式
 
 # 第十章
 golang并发设计模式
-   1. worker
+   1. Generating Channels
    2. fanin fanout
+   3. worker
 
 # 第十一章
 微服务与golang （一种设计模式）
