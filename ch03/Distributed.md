@@ -81,6 +81,7 @@ golang并发设计模式
    1. Generating Channels
    2. fanin fanout
    3. worker
+   4. 日志监控系统
 
 # 第十一章
 微服务与golang （一种设计模式）
