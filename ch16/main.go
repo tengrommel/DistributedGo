@@ -5,6 +5,10 @@ import (
 	"os"
 	"fmt"
 	"bufio"
+	"gonum.org/v1/plot"
+	"gonum.org/v1/plot/plotter"
+	"gonum.org/v1/plot/vg/draw"
+	"image/color"
 )
 
 func main() {
@@ -12,9 +16,50 @@ func main() {
 	if err != nil{
 		log.Fatalf("could not read data.txt: %v", err)
 	}
-	for _, xy := range xys  {
-		fmt.Println(xy.x, xy.y)
+	err = plotData("out.png", xys)
+	if err != nil{
+		log.Fatalf("could not plot data: %v", err)
 	}
+}
+func plotData(path string, xys []xy) error {
+	f, err := os.Create(path)
+	if err != nil{
+		return fmt.Errorf("could not create %s: %v", path, err)
+	}
+
+	p, err := plot.New()
+	if err != nil{
+		return fmt.Errorf("could not create plot: %v", err)
+	}
+
+	pxys := make(plotter.XYs, len(xys))
+	for i, xy :=range xys{
+		pxys[i].X = xy.x
+		pxys[i].Y = xy.y
+	}
+
+	s, err := plotter.NewScatter(pxys)
+	if err != nil{
+		return fmt.Errorf("could not create scatter: %v", err)
+	}
+	s.GlyphStyle.Shape = draw.CrossGlyph{}
+	s.Color = color.RGBA{R:255, A:255}
+	p.Add(s)
+
+	wt, err := p.WriterTo(512, 512, "png")
+	if err != nil{
+		return fmt.Errorf("could not create writer: %v", err)
+	}
+
+
+	_, err = wt.WriteTo(f)
+	if err != nil{
+		return fmt.Errorf("could not write to %s: %v",path, err)
+	}
+	if err := f.Close(); err != nil{
+		return fmt.Errorf("could not close %s: %v", path, err)
+	}
+	return nil
 }
 
 type xy struct {
