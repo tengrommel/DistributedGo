@@ -12,7 +12,9 @@ func main() {
 	if err != nil{
 		log.Fatalf("could not read data.txt: %v", err)
 	}
-	_ = xys
+	for _, xy := range xys  {
+		fmt.Println(xy.x, xy.y)
+	}
 }
 
 type xy struct {
@@ -29,7 +31,13 @@ func readData(path string) ([]xy, error) {
 	var xys []xy
 	s := bufio.NewScanner(f)
 	for s.Scan(){
-		fmt.Println(s.Text())
+		var x, y float64
+		_, err := fmt.Sscanf(s.Text(), "%f,%f", &x, &y)
+		if err != nil{
+			log.Printf("discarding bad data point %q: %v", s.Text(), err)
+			continue
+		}
+		xys = append(xys, xy{x,y})
 	}
 	if err := s.Err(); err != nil{
 		return nil, fmt.Errorf("could not scan: %v", )
