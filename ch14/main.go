@@ -5,12 +5,20 @@ import (
 	"github.com/gorilla/websocket"
 	"log"
 	"fmt"
+	"github.com/satori/go.uuid"
+	"DistributedGo/ch14/pubsub"
 )
 
 var upgrader = websocket.Upgrader{
 	ReadBufferSize: 1024,
 	WriteBufferSize: 1024,
 }
+
+func autoId() (string) {
+	return uuid.Must(uuid.NewV4(), nil).String()
+}
+
+var ps = &pubsub.PubSub{}
 
 func websocketHandler(w http.ResponseWriter, r *http.Request)  {
 	upgrader.CheckOrigin = func(r *http.Request) bool {
@@ -24,6 +32,14 @@ func websocketHandler(w http.ResponseWriter, r *http.Request)  {
 	}
 
 	fmt.Println("New Client is connected")
+
+	client := pubsub.Client{
+		Id:autoId(),
+		Connection: conn,
+	}
+
+	ps.AddClient(client)
+
 	for{
 		messageType, p, err := conn.ReadMessage()
 		if err != nil{
