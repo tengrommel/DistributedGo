@@ -46,12 +46,7 @@ func websocketHandler(w http.ResponseWriter, r *http.Request)  {
 			log.Println(err)
 			return
 		}
-		aMessage := []byte("Hi Client i'm server")
-		if err := conn.WriteMessage(messageType, aMessage); err != nil{
-			log.Println(err)
-			return
-		}
-		fmt.Printf("New message from Client:%s", p)
+		ps.HandleReceiveMessage(client, messageType, p)
 	}
 }
 
