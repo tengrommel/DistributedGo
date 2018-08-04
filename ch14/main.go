@@ -44,6 +44,8 @@ func websocketHandler(w http.ResponseWriter, r *http.Request)  {
 		messageType, p, err := conn.ReadMessage()
 		if err != nil{
 			log.Println(err)
+			log.Println("total clients and subscriptions ", len(ps.Clients), len(ps.Subscriptions))
+			ps.RemoveClient(client)
 			return
 		}
 		ps.HandleReceiveMessage(client, messageType, p)
