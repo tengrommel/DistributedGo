@@ -40,6 +40,7 @@ go web的基本知识
 
 #第五章
 go 网络编程
+- CORS
 
 1. go 文件操作
 2. bufio等包
