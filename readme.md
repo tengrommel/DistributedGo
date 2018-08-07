@@ -28,7 +28,7 @@ golang语言简介
 3. dep包管理工具
 4. go的版本管理gvm
 5. aws
-
+6. oauth2
     
     sudo vim /usr/local/sbin/gobuildaws
     
