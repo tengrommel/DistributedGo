@@ -27,6 +27,15 @@ golang语言简介
     - gitfork
 3. dep包管理工具
 4. go的版本管理gvm
+5. aws
+
+    
+    sudo vim /usr/local/sbin/gobuildaws
+    
+    #! /usr/bin/bash
+    GOOS=linux GOARCH=amd64 go build -o main
+    zip main.zip main
+
 
 #第三章
 1. docker与go
