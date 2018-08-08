@@ -2,10 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Comments</title>
+    <link rel="stylesheet" type="text/css" href="/static/index.css">
 </head>
 <body>
     <h1>Comments</h1>
+    <form METHOD="POST">
+        <textarea name="comment"></textarea>
+        <div>
+            <button type="submit">Post Comment</button>
+        </div>
+    </form>
     {{ range . }}
     <div>{{ . }}</div>
     {{end}}
